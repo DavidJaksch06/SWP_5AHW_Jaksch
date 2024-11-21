@@ -1,8 +1,7 @@
 from collections import Counter
 import random
 
-zahlen = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-farben = ["\u2660", "\u2665", "\u2663", "\u2666"]
+
 
 
 class Karte:
@@ -14,7 +13,7 @@ class Karte:
         return f"{self.zahl}{self.farbe}"
 
 
-def erstelle_hand():
+def erstelle_hand(zahlen, farben):
     deck = [Karte(zahl, farbe) for zahl in zahlen for farbe in farben]
     hand = random.sample(deck, 5)
     return hand
@@ -58,28 +57,38 @@ def pruefe_hand(hand):
     if haeufigkeiten == [2, 1, 1, 1]:
         return "Paar"
 
-    #also nichts
+    # also nichts
     return "Hohe Karte"
 
 
 def main():
+    zahlen = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    farben = ["\u2660", "\u2665", "\u2663", "\u2666"]
+
+    while True:
+        try:
+            ziehungsanzahl = int(input("Bitte geben Sie die Anzahl der Ziehungen ein: "))
+            break
+        except ValueError:
+            print("Ungültige Eingabe! Bitte geben Sie eine ganze Zahl ein.")
+
     poker_haende = \
-    {
-        "Hohe Karte": 0,
-        "Paar": 0,
-        "Zwei Paare": 0,
-        "Drilling": 0,
-        "Straight": 0,
-        "Flush": 0,
-        "Full House": 0,
-        "Vierling": 0,
-        "Straight Flush": 0,
-        "Royal Flush": 0
-    }
+        {
+            "Hohe Karte": 0,
+            "Paar": 0,
+            "Zwei Paare": 0,
+            "Drilling": 0,
+            "Straight": 0,
+            "Flush": 0,
+            "Full House": 0,
+            "Vierling": 0,
+            "Straight Flush": 0,
+            "Royal Flush": 0
+        }
 
     # 100 000 Hände
-    for i in range(100000):
-        hand = erstelle_hand()
+    for i in range(ziehungsanzahl):
+        hand = erstelle_hand(zahlen, farben)
 
         print("Gezogene Hand:", ' '.join(str(karte) for karte in hand))
 
@@ -92,14 +101,15 @@ def main():
     # anzahl der häufigkeiten
     zaehlungen = list(poker_haende.values())
 
-    #gesamte Ziehungen
+    # gesamte Ziehungen
     gesamt_zaehlungen = sum(zaehlungen)
+
 
     prozentsaetze = [(zaehlung / gesamt_zaehlungen) * 100 for zaehlung in zaehlungen]
 
     print("\nPoker Hände Häufigkeiten und Prozentsätze:")
     for hand, zaehlung, prozentsatz in zip(haende, zaehlungen, prozentsaetze):
-        print(f"{hand}: {zaehlung} ({prozentsatz:.5f}%)")
+        print(f"{hand}: {zaehlung} ({prozentsatz:.3f}%)")
 
 
 if __name__ == "__main__":
