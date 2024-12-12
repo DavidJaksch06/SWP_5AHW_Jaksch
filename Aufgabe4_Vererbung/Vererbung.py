@@ -54,24 +54,3 @@ class Firma:
             "Frauen": round((frauen / gesamt_mitarbeiter) * 100, 2),
             "Männer": round((maenner / gesamt_mitarbeiter) * 100, 2)
         }
-
-firma = Firma("TechCorp")
-
-entwicklung = Abteilung("Entwicklung")
-marketing = Abteilung("Marketing")
-
-firma.hinzufuegen_abteilung(entwicklung)
-firma.hinzufuegen_abteilung(marketing)
-
-entwicklung.hinzufuegen_mitarbeiter(Mitarbeiter("Alice", "w", entwicklung))
-entwicklung.hinzufuegen_mitarbeiter(Mitarbeiter("Bob", "m", entwicklung))
-entwicklung.hinzufuegen_mitarbeiter(Abteilungsleiter("Charlie", "m", entwicklung))
-
-marketing.hinzufuegen_mitarbeiter(Mitarbeiter("Diana", "w", marketing))
-marketing.hinzufuegen_mitarbeiter(Abteilungsleiter("Eve", "w", marketing))
-
-print("Anzahl Mitarbeiter:", firma.gesamtanzahl_mitarbeiter())
-print("Anzahl Abteilungsleiter:", firma.gesamtanzahl_abteilungsleiter())
-print("Anzahl Abteilungen:", firma.gesamtanzahl_abteilungen())
-print("Größte Abteilung:", firma.groesste_abteilung().name)
-print("Prozentanteil Geschlechter:", firma.prozentanteil_geschlechter())
