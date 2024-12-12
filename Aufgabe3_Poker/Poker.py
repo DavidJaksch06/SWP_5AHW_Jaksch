@@ -86,7 +86,6 @@ def main():
             "Royal Flush": 0
         }
 
-    # 100 000 Hände
     for i in range(ziehungsanzahl):
         hand = erstelle_hand(zahlen, farben)
 
@@ -104,7 +103,6 @@ def main():
     # gesamte Ziehungen
     gesamt_zaehlungen = sum(zaehlungen)
 
-
     prozentsaetze = [(zaehlung / gesamt_zaehlungen) * 100 for zaehlung in zaehlungen]
 
     print("\nPoker Hände Häufigkeiten und Prozentsätze:")
@@ -114,3 +112,24 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+#class Auto:
+ #   def __init__(self, marke, modell):
+  #      self.marke = marke
+   #     self.modell = modell
+
+    #def start(self):
+     #   print("Das Auto startet.")
+
+#class ElektroAuto(Auto):
+ #   def __init__(self, marke, modell, batteriekapazitaet):
+  #      super().__init__(marke, modell)
+   #     self.batteriekapazitaet = batteriekapazitaet
+
+    #def start(self):
+     #   print("Das Elektroauto startet lautlos!")
+
+# Test
+#e_auto = ElektroAuto("Tesla", "Model S", 100)
+#e_auto.start()
