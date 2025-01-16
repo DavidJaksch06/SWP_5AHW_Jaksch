@@ -1,5 +1,9 @@
 class Person:
     def __init__(self, name, geschlecht):
+        if not name or not isinstance(name, str):  # Fehler a) Neuer Fehler und behebar
+            raise ValueError("Name muss ein nicht-leerer String sein.")
+        if geschlecht not in ['m', 'w']:  # Fehler a) Neuer Fehler und behebar
+            raise ValueError("Geschlecht muss 'm' oder 'w' sein.")
         self.name = name
         self.geschlecht = geschlecht
 
@@ -22,6 +26,8 @@ class Abteilung:
         self.mitarbeiter = []
 
     def hinzufuegen_mitarbeiter(self, mitarbeiter):
+        if not isinstance(mitarbeiter, Mitarbeiter):  # Fehler b) Hochblubber-Fehler und behebar
+            raise TypeError("Nur Objekte der Klasse Mitarbeiter oder Abteilungsleiter können hinzugefügt werden.")
         self.mitarbeiter.append(mitarbeiter)
 
     def anzahl_mitarbeiter(self):
@@ -34,6 +40,8 @@ class Firma:
         self.abteilungen = []
 
     def hinzufuegen_abteilung(self, abteilung):
+        if not isinstance(abteilung, Abteilung):  # Fehler c) Neuer Fehler und NICHT behebar
+            raise TypeError("Nur Objekte der Klasse Abteilung können hinzugefügt werden.")
         self.abteilungen.append(abteilung)
 
     def gesamtanzahl_mitarbeiter(self):
@@ -47,7 +55,10 @@ class Firma:
         return len(self.abteilungen)
 
     def groesste_abteilung(self):
-        return max(self.abteilungen, key=lambda abt: abt.anzahl_mitarbeiter(), default=None)
+        try:
+            return max(self.abteilungen, key=lambda abt: abt.anzahl_mitarbeiter(), default=None)
+        except ValueError as e:  # Fehler d) Hochblubber-Fehler und NICHT behebar
+            raise RuntimeError("Es gibt keine Abteilungen in der Firma.") from e
 
     def prozentanteil_geschlechter(self):
         gesamt_mitarbeiter = self.gesamtanzahl_mitarbeiter()
