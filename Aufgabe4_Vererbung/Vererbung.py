@@ -3,15 +3,18 @@ class Person:
         self.name = name
         self.geschlecht = geschlecht
 
+
 class Mitarbeiter(Person):
     def __init__(self, name, geschlecht, abteilung):
         super().__init__(name, geschlecht)
         self.abteilung = abteilung
 
+
 class Abteilungsleiter(Mitarbeiter):
     def __init__(self, name, geschlecht, abteilung):
         super().__init__(name, geschlecht, abteilung)
         self.leitet_abteilung = abteilung
+
 
 class Abteilung:
     def __init__(self, name):
@@ -23,6 +26,7 @@ class Abteilung:
 
     def anzahl_mitarbeiter(self):
         return len(self.mitarbeiter)
+
 
 class Firma:
     def __init__(self, name):
@@ -36,7 +40,8 @@ class Firma:
         return sum(abteilung.anzahl_mitarbeiter() for abteilung in self.abteilungen)
 
     def gesamtanzahl_abteilungsleiter(self):
-        return sum(1 for abteilung in self.abteilungen if any(isinstance(m, Abteilungsleiter) for m in abteilung.mitarbeiter))
+        return sum(
+            1 for abteilung in self.abteilungen if any(isinstance(m, Abteilungsleiter) for m in abteilung.mitarbeiter))
 
     def gesamtanzahl_abteilungen(self):
         return len(self.abteilungen)
