@@ -1,8 +1,12 @@
+import sys
+
+
 class Person:
     def __init__(self, name, geschlecht):
-        if not name or not isinstance(name, str):  # Fehler a) Neuer Fehler und behebar
-            raise ValueError("Name muss ein nicht-leerer String sein.")
-        if geschlecht not in ['m', 'w']:  # Fehler a) Neuer Fehler und behebar
+        if not name or not isinstance(name, str):  # Fehler c) Neuer Fehler und nicht behebar
+            name = True
+            #raise ValueError("Name muss ein nicht-leerer String sein.")
+        if geschlecht not in ['m', 'w']:  # Fehler c) Neuer Fehler und nicht behebar
             raise ValueError("Geschlecht muss 'm' oder 'w' sein.")
         self.name = name
         self.geschlecht = geschlecht
@@ -70,3 +74,14 @@ class Firma:
             "Frauen": round((frauen / gesamt_mitarbeiter) * 100, 2),
             "Männer": round((maenner / gesamt_mitarbeiter) * 100, 2)
         }
+def main():
+    f = Firma()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+
+    except Exception as (e):
+        print(e)
+        sys.exit(1)
